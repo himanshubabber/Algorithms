@@ -1,0 +1,23 @@
+void  bfs(int i,unordered_map<int,vector<int>>&adj,vector<bool>&vis) {
+        
+        
+        vector<int>ans;
+        queue<int>q;
+       
+        
+        q.push(i);
+        vis[i]=1;
+        while(!q.empty()){
+              int ft=q.front();
+              q.pop();
+              
+              ans.push_back(ft);
+              
+              for(auto i:adj[ft]){
+                  if(!vis[i]){
+                 q.push(i);
+                 vis[i]=1;}
+              }
+        }
+        
+    }
