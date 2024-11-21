@@ -1,0 +1,33 @@
+// max and min of array using divide and conquer approch 
+#include<bits/stdc++.h>
+using namespace std;
+
+pair<int,int> f(vector<int> & arr, int s, int e){
+    if(s==e){
+        return {arr[s], arr[e]};
+    }
+    
+    if(e== s+1){
+        return {min(arr[s], arr[e]), max(arr[s], arr[e])};
+    }
+    int mid= s+(e-s)/2;
+    pair<int,int> left= f(arr, 0, mid);
+    pair<int,int> right= f(arr, mid+1, e);
+    
+    
+    return {min(left.first, right.first),
+     max(left.second, right.second)};
+
+}
+
+
+int main() {
+    
+    vector<int> v={1,6,3,4,9,10,20};
+    int s=0;
+    int e=v.size()-1;
+    cout<<f(v,s,e).first<<" "<<f(v,s,e).second<<endl;
+    
+    
+    return 0;
+}
