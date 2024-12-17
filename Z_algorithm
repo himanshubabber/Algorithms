@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+#include<iostream>
+#include<string>
+using namespace std;
+
+vector<int>z_algorithm(string s){
+    vector<int>z(s.size(),0);
+    int l= 0;
+    int r= 0;
+    for(int i=1; i<static_cast<int>(s.size()); i++){
+        if(l< i && i< r){
+            z[i]= z[i-l]; // reuse of already computed values
+
+            if(z[i]+i> r){
+              z[i]= r-i+1; // if current computer value of z[i] exceed r range
+            }
+        }
+
+        // check for more further matching possible 
+        while(i+z[i]< s.size() && s[z[i]]== s[i+z[i]]) z[i]++;
+
+        if(i+z[i]-1> r){
+            l= i;
+            r= i+z[i]-1;
+        }
+    }
+    return z;
+}
+
+int main(){
+    string s;
+    cin>>s;
+    string pat;
+    cin>>pat;
+    string ans= pat+'$'+s;
+     vector<int> z=z_algorithm(ans);
+     vector<int>occurances;
+
+     for(int i=pat.size();i<z.size();i++){
+        if(z[i]==pat.size()) occurances.push_back(i-z[i]-1);
+     }
+
+     cout<<"occurances of pat in s :"<<endl;
+     for(auto i: occurances) cout<<i<<" ";
+     cout<<endl;
+
+    return 0;
+}
