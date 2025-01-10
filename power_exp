@@ -1,0 +1,12 @@
+ ll power_exp(ll b, ll p){
+        if(p==0) return 1;
+        ll ans= 1;
+       ans= power_exp(b,p/2);
+         ans*= ans;
+         ans%= m;
+         if(p%2 == 1){
+            ans*= b;
+            ans%= m;
+         }
+        return ans;
+    }
