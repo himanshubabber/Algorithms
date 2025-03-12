@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() 
+{
+  int n;
+  cin>>n;
+  vector<int>arr(n);
+  for(int i=0;i<n;i++) cin>>arr[i];
+  
+ // 10
+//-2  -1 3 4 4  12 12 13 13 14
+  
+  
+  // first occurrence of element if present
+  cout<<lower_bound(arr.begin(),arr.end(),-1)-arr.begin()<<endl;
+   cout<<lower_bound(arr.begin(),arr.end(),4)-arr.begin()<<endl;
+   // if not present give next greater element ind
+  cout<<lower_bound(arr.begin(),arr.end(),2)-arr.begin()<<endl;
+  // if ele is outside the range give n as ind
+  cout<<lower_bound(arr.begin(),arr.end(),15)-arr.begin()<<endl;
+  
+  // upper bound 
+  cout<<upper_bound(arr.begin(),arr.end(),-1)-arr.begin()<<endl;
+   cout<<upper_bound(arr.begin(),arr.end(),4)-arr.begin()<<endl;
+   // if not present give next greater element ind
+  cout<<upper_bound(arr.begin(),arr.end(),2)-arr.begin()<<endl;
+  // if ele is outside the range give n as ind
+  cout<<upper_bound(arr.begin(),arr.end(),15)-arr.begin()<<endl;
+  
+  // o/p
+  // 1
+  // 3
+  // 2
+  //10
+  //2
+  //5
+  //2
+  //10
+   
+    return 0;
+}
