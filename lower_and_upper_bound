@@ -19,24 +19,28 @@ int main()
   cout<<lower_bound(arr.begin(),arr.end(),2)-arr.begin()<<endl;
   // if ele is outside the range give n as ind
   cout<<lower_bound(arr.begin(),arr.end(),15)-arr.begin()<<endl;
+  cout<<lower_bound(arr.begin(),arr.end(),-3)-arr.begin()<<endl;
   
-  // upper bound 
+  //upper bound 
   cout<<upper_bound(arr.begin(),arr.end(),-1)-arr.begin()<<endl;
    cout<<upper_bound(arr.begin(),arr.end(),4)-arr.begin()<<endl;
    // if not present give next greater element ind
   cout<<upper_bound(arr.begin(),arr.end(),2)-arr.begin()<<endl;
   // if ele is outside the range give n as ind
   cout<<upper_bound(arr.begin(),arr.end(),15)-arr.begin()<<endl;
+   cout<<upper_bound(arr.begin(),arr.end(),-3)-arr.begin()<<endl;
   
   // o/p
   // 1
   // 3
   // 2
   //10
+  //0
   //2
   //5
   //2
   //10
+  //0
    
     return 0;
 }
