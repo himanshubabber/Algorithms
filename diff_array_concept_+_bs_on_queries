@@ -1,0 +1,53 @@
+
+// diff array concept + binary search on queries
+//https://leetcode.com/problems/zero-array-transformation-ii/?envType=daily-question&envId=2025-03-13
+
+
+class Solution {
+public:
+    bool check(int mid,vector<vector<int>>&queries,vector<int>&diff,
+    vector<int>&nums){
+
+        for(int i=0;i<=mid;i++){
+            int l=queries[i][0];
+            int r=queries[i][1];
+            int val=queries[i][2];
+           diff[l]+=val;
+           diff[r+1]-=val;
+        }
+        int val=0;
+        for(int i=0;i<nums.size();i++){
+           if(val+diff[i]<nums[i]) return false;
+           val+= diff[i];
+        }
+        return true;
+    }
+
+    int minZeroArray(vector<int>& nums, vector<vector<int>>& queries) {
+        int n=nums.size();
+        int s=0;
+        int e=queries.size()-1;
+        int mid=s+(e-s)/2;
+        int ans=-1;
+        int fg=true;
+        for(auto i:nums){
+            if(i!=0) fg=false;
+        }
+
+        if(fg) return 0;
+        
+        while(s<=e){
+            vector<int>diff(n+1,0);
+            if(check(mid,queries,diff,nums)==true){
+                cout<<mid<<endl;
+                ans=mid+1;
+                e=mid-1;
+            }
+            else s=mid+1;
+
+            mid=s+(e-s)/2;
+        }
+       
+       return ans;
+    }
+};
