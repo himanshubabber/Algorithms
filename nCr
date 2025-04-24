@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long 
+#define m 1000000007
+// code for ncr
+
+ll power(ll a, ll b){
+  if(b==0) return 1;
+  ll half=power(a,b/2);
+  ll ans = (half*half)%m;
+  
+  if(b%2==1) ans= (ans*a)%m;
+  
+  return ans;
+}
+
+ll ncr(ll n,ll r,vector<ll>&fact){
+  if(r<0 || r>n) return 0;
+  
+  ll deno= (fact[r]*fact[n-r])%m;
+  
+  return (fact[n]*power(deno,m-2))%m;
+}
+
+int main() 
+{     ll n;
+       cout<<"enter the n :"<<endl;
+       cin>>n;
+       ll r;
+      cout<<"enter the r:"<<endl;
+      cin>>r;
+      
+      vector<ll>fact(n+1,0);
+      fact[0]=1;
+      for(int i=1;i<=n;i++){
+         fact[i]=(fact[i-1]*i)%m;
+      }
+      
+      ll ans=ncr(n,r,fact);
+      cout<<ans<<endl;
+      
+    cout << "Hello, World!";
+    return 0;
+}
