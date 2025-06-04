@@ -1,0 +1,116 @@
+class Solution {
+  public:
+    // Function to find sum of weights of edges of the Minimum Spanning Tree.
+    class dsu{
+        public:
+        vector<int>par;
+        vector<int>rank;
+        dsu(int n){
+            par.resize(n);
+            rank.resize(n);
+            for(int i=0;i<n;i++){
+                par[i]=i;
+                rank[i]=0;
+            }
+        }
+        
+        int find(int x){
+            if(par[x]!=x){
+                par[x]=find(par[x]);
+            }
+            return par[x];
+        }
+        
+        void unite(int x,int y){
+            int par_x=find(x);
+            int par_y=find(y);
+            
+            if(par_x!=par_y){
+                if(rank[par_x]>rank[par_y]){
+                par[par_y]=par_x;
+            }
+            else if(rank[par_x]<rank[par_y]){
+                par[par_x]=par_y;
+            }
+            else{
+                rank[par_x]++;
+                par[par_y]=par_x;
+            }
+            } 
+        }
+    };
+    
+    static bool cmp(vector<int>&a,vector<int>&b){
+        return a[2]<b[2];
+    }
+    
+    int spanningTree(int V, vector<vector<int>> adj[]) {
+        // code here
+        /*dsu*d= new dsu(V);
+        
+        vector<vector<int>>edges;
+        
+        for(int i=0;i<V;i++){
+          for(auto j:adj[i]){
+              edges.push_back({i,j[0],j[1]});
+          }
+        }
+        
+        sort(edges.begin(),edges.end(),cmp);
+        int ans=0;
+        
+        for(int i=0;i<edges.size();i++){
+            int u=edges[i][0];
+            int v=edges[i][1];
+            int w=edges[i][2];
+            if(d->find(u)!=d->find(v)){
+                ans+=w;
+                d->unite(u,v);
+            }
+        }
+        
+        return ans;*/
+         vector<vector<int>>edges;
+        
+        for(int i=0;i<V;i++){
+          for(auto j:adj[i]){
+              edges.push_back({i,j[0],j[1]});
+          }
+        }
+        
+        unordered_map<int,vector<pair<int,int>>>mp;
+        for(auto i:edges){
+            mp[i[0]].push_back({i[1],i[2]});
+            mp[i[1]].push_back({i[0],i[2]});
+        }
+        
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
+        pq.push({0,0});
+        vector<int>vis(V,0);
+        int ans=0;
+        
+        while(!pq.empty()){
+            int d=pq.top().first;
+            int i=pq.top().second;
+            
+            pq.pop();
+            
+            if(!vis[i]){
+                ans+=d;
+                vis[i]=1;
+            }
+            else continue;
+            
+            for(auto j:mp[i]){
+                int n2=j.first;
+                int w=j.second;
+                
+                if(!vis[n2]){
+                    pq.push({w,n2});
+                }
+            }
+        }
+        return ans;
+        
+    }
+};
