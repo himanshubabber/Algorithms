@@ -1,0 +1,81 @@
+#include<bits/stdc++.h>
+void dfs(int i,unordered_map<int,vector<int>>&mp,vector<int>&vis,stack<int>&st){
+    vis[i]=1;
+    for(auto j:mp[i]){
+        if(!vis[j]){
+            dfs(j,mp,vis,st);
+        }
+    }
+    st.push(i);
+}
+
+void dfs2(int i,unordered_map<int,vector<int>>&mp,vector<int>&vis,vector<int>&temp){
+    vis[i]=1;
+    temp.push_back(i);
+    for(auto j:mp[i]){
+        if(!vis[j]){
+            dfs2(j,mp,vis,temp);
+        }
+    }
+}
+vector<vector<int>> stronglyConnectedComponents(int n, vector<vector<int>> &edges)
+{
+    // Write your code here.
+    unordered_map<int,vector<int>>mp;
+    for(auto i:edges){
+        mp[i[0]].push_back(i[1]);
+    }
+
+    vector<int>vis(n,0);
+    stack<int>st;
+
+    for(int i=0;i<n;i++){
+        if(!vis[i]){
+            dfs(i,mp,vis,st);
+        }
+    }
+    unordered_map<int,vector<int>>mp2;
+     for(auto i:edges){
+        mp2[i[1]].push_back(i[0]);
+    }
+
+    vector<vector<int>>ans;
+    vector<int>vis2(n,0);
+
+    while(!st.empty()){
+        vector<int>temp;
+        if(!vis2[st.top()])
+        dfs2(st.top(),mp2,vis2,temp);
+        ans.push_back(temp);
+        st.pop();
+    }
+
+    return ans;
+
+}
+
+nt main() {
+    int n, m;
+    cout << "Enter number of nodes and edges: ";
+    cin >> n >> m;
+
+    vector<vector<int>> edges(m);
+    cout << "Enter edges (from to):" << endl;
+    for (int i = 0; i < m; ++i) {
+        int u, v;
+        cin >> u >> v;
+        edges[i] = {u, v};
+    }
+
+    vector<vector<int>> sccs = stronglyConnectedComponents(n, edges);
+
+    cout << "\nStrongly Connected Components:\n";
+    for (const auto& comp : sccs) {
+        for (int node : comp) {
+            cout << node << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
