@@ -1,0 +1,53 @@
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        
+        int n=nums.size();
+      /*  for(int i=0;i<n-1;i++){
+         int minindex=i;
+            for(int j=i+1;j<n;j++){
+
+            if(nums[j]<nums[minindex]){
+
+            minindex=j;
+            }
+            }
+            swap(nums[minindex],nums[i]);
+        
+        }
+        
+        */
+        // bubble sort
+        /*
+        for(int i=1;i<n;i++){
+        bool swapped=false;
+            for(int j=0;j<n-i;j++){
+
+            if(nums[j+1]<nums[j]){
+  swap(nums[j+1],nums[j]);
+                swapped=true;
+            }
+            }
+            if(swapped==false){
+              break;
+            } 
+        }
+        
+        */
+        // insertion sort
+        for(int i=1;i<n;i++){
+         int temp=nums[i];
+            int j=i-1;
+        for(;j>=0;j--){
+        if(nums[j]>temp){
+      nums[j+1]=nums[j];
+        }
+            else{
+            break;
+            }
+        }
+            nums[j+1]=temp;
+        }
+           
+    }
+};
