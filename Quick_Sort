@@ -1,0 +1,52 @@
+int partition(vector<int>& arr,int s,int e){
+    int pivot=arr[s];
+ int count =0;
+ for(int i = s+1 ;i<=e;i++){
+    if(arr[i]<=pivot)
+    count++;
+ }
+ 
+ // now place the pivot element at right place
+ int pivotindex=s+count;
+swap(arr[pivotindex],arr[s]);
+
+// aab left and right wla part ko dekh lete hn 
+int i=s,j=e;
+while(i<pivotindex && j>pivotindex){
+ 
+ while(arr[i]<=pivot){
+
+    i++;
+    
+ }
+ while(arr[j]>pivot)
+{
+    j--;
+}
+if(i<pivotindex && j>pivotindex){
+    swap(arr[i++],arr[j--]);
+
+}
+
+}
+return pivotindex;
+}
+void solve(vector<int> &arr,int s,int e){
+    // base case
+    if(s>=e){
+        return;
+    }
+    // aab partition karege
+    int p=partition(arr,s,e);
+    // aab left wla part sort karge 
+    solve(arr,s,p-1);
+    //aab right wla part sort karege
+   solve(arr,p+1,e);
+}
+
+
+vector<int> quickSort(vector<int> arr)
+{
+ solve(arr,0,arr.size()-1);
+ return arr;
+}
