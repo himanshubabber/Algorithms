@@ -2,6 +2,9 @@
 #include<vector>
 using namespace std;
 
+// heapify takes logn time
+// beacause for n elements height of bt is logn
+
 void heapify(vector<int>&a,int n,int i) {
     int l=i, r=2*i+1, s=2*i+2;
 
@@ -16,10 +19,10 @@ void heapify(vector<int>&a,int n,int i) {
 
 void heapSort(vector<int>&a) {
     int n=a.size();
-
+    // it will take o(n) time heap build not o(nlogn)
     for(int i=n/2-1;i>=0;i--) 
         heapify(a,n,i);
-
+    // nlogn time
     for(int i=n-1;i>0;i--) {
         swap(a[0],a[i]);
         heapify(a,i,0);
