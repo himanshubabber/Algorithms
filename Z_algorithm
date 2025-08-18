@@ -3,28 +3,27 @@
 #include<string>
 using namespace std;
 
-vector<int>z_algorithm(string s){
-    vector<int>z(s.size(),0);
-    int l= 0;
-    int r= 0;
-    for(int i=1; i<static_cast<int>(s.size()); i++){
-        if(l< i && i< r){
-            z[i]= z[i-l]; // reuse of already computed values
+vector<int>z_vector(string &s){
+        int l=0;
+        int r=0;
+        vector<int>z(s.size(),0);
 
-            if(z[i]+i> r){
-              z[i]= r-i+1; // if current computer value of z[i] exceed r range
+        for(int i=1;i<s.size();i++){
+            if(i<r){
+                z[i]=z[i-l];
+                if(i+z[i]>r){
+                    z[i]=r-i;
+                }
+            }
+
+            while(i+z[i]<s.size() && s[z[i]]==s[i+z[i]]) z[i]++;
+
+            if(i+z[i]>r){
+                l=i;
+                r=i+z[i];
             }
         }
-
-        // check for more further matching possible 
-        while(i+z[i]< s.size() && s[z[i]]== s[i+z[i]]) z[i]++;
-
-        if(i+z[i]-1> r){
-            l= i;
-            r= i+z[i]-1;
-        }
-    }
-    return z;
+        return z;
 }
 
 int main(){
