@@ -1,0 +1,23 @@
+// gcd 
+// greatest common divisor 
+// a=28 b=22
+// 22|28
+//    22
+//    6|22
+//      18
+//      4|6
+//        4
+//        2|4
+//          4
+//          0
+
+int gcd(int a,int b){
+
+      while(b!=0){
+        int temp=b;
+        b=a%b;
+        a=temp;
+      }
+
+    return a;
+    }
