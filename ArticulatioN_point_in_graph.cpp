@@ -14,6 +14,13 @@
 
 // Why? low[j] >= disc[i] means that the child j (and everything below it) cannot find a back-edge to an ancestor of i. The highest up they can reach is node i itself (or lower). Therefore, node j is trapped. If you remove i, j is cut off from the rest of the graph.
 
+
+// main idea is that ki ek particular node i se jab dfs call j pe marke jab wapis aate hn tab agar i node ko chorke uske 
+// kisi ancestor se low of j update hua hn toh wo hamesa kam hi hoga i ke disc se toh wo toh wo ap nhi hoga 
+// agar wo i se update hua hn toh wo equal hoga us case me ap hoga.=> matlab j hm bas i ke through hi pahuch sakte hn baki
+// aur kisi ke through nhii.
+
+
 class Solution {
   public:
   void dfs(int i,vector<int>adj[],vector<int>&ans,vector<int>&disc
