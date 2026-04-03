@@ -2,6 +2,7 @@
 #include<vector>
 using namespace std;
 
+// max heap se increase order me sort hota hn 
 // heapify takes logn time
 // beacause for n elements height of bt is logn
 
