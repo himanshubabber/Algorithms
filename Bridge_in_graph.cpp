@@ -1,3 +1,12 @@
+// the only difference in it with articulation point is equality sign is not in bridge
+// because i---j---k
+//             |  /
+//             m/
+// j-k bridge nhi hn but disc of j is equal to low of k
+// i-j bridge hn then esme low[j]> disc[i]
+// main reason j se agar kisi neighbour pe backedge hogi toh uske neighbour ka low uske disc ke equal ho jaega 
+// aur hmne yaha backedge wala case nhi dekhna kuki usme edge remove pe bhi disconnect nhi hoga.
+                 
 class Solution {
   public:
   bool fg=false;
