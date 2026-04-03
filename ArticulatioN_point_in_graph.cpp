@@ -1,5 +1,19 @@
 //User function Template for C++
 
+// Rule 1: The Root Node (par == -1)
+// If the node where you started the DFS (the root) has more than one independent child in the DFS tree, it is an AP.
+
+// Code logic: if(par==-1 && child>1) { ans[i]=1; }
+
+// Why? If the root has two children, the only way those two children connect to each other is through the root. If you remove the root, they get disconnected.
+
+// Rule 2: Non-Root Nodes (par != -1)
+// For any non-root node i with a child j, if low[j] >= disc[i], then node i is an AP.
+
+// Code logic: if(low[j] >= disc[i] && par != -1) { ans[i]=1; }
+
+// Why? low[j] >= disc[i] means that the child j (and everything below it) cannot find a back-edge to an ancestor of i. The highest up they can reach is node i itself (or lower). Therefore, node j is trapped. If you remove i, j is cut off from the rest of the graph.
+
 class Solution {
   public:
   void dfs(int i,vector<int>adj[],vector<int>&ans,vector<int>&disc
